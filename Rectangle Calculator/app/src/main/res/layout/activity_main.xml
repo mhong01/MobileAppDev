@@ -23,7 +23,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="@string/label_width"
-            android:textSize="16dp"
+            android:textSize="@dimen/label_size"
             android:textStyle="bold" />
 
         <EditText
@@ -50,7 +50,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="@string/lbl_height"
-            android:textSize="16dp"
+            android:textSize="@dimen/label_size"
             android:textStyle="bold" />
 
         <EditText
@@ -78,7 +78,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="@string/lbl_area"
-            android:textSize="16dp"
+            android:textSize="@dimen/label_size"
             android:textStyle="bold" />
 
         <TextView
@@ -104,7 +104,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="@string/lbl_perimeter"
-            android:textSize="16dp"
+            android:textSize="@dimen/label_size"
             android:textStyle="bold" />
 
         <TextView
