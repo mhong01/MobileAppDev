@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Rectangle Calculator</string>
+    <string name="label_width">Width</string>
+    <string name="lbl_height">Height</string>
+    <string name="lbl_area">Area</string>
+    <string name="lbl_perimeter">Perimeter</string>
+</resources>
