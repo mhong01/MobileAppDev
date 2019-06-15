@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="width">100dp</dimen>
+    <dimen name="height">100dp</dimen>
+    <dimen name="linear_height">500dp</dimen>
+    <dimen name="btn_width">300dp</dimen>
+    <dimen name="txt_new_player_width">300dp</dimen>
+    <dimen name="text_size">20sp</dimen>
+</resources>
