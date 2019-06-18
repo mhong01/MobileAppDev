@@ -1,8 +1,11 @@
 package com.example.tictactoe;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.PersistableBundle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -34,6 +37,9 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
     final String EMPTY_TEXT = "";
 
     List<Button> buttons = null;
+
+    SharedPreferences preferences = null;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -112,12 +118,7 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
     public void onClick(View v) {
 
         if (v.getId() == R.id.btnNewGame){
-            for (Button b : buttons){
-                b.setClickable(true);
-                b.setText(EMPTY_TEXT);
-                isXPlayer = true;
-                setMessage();
-            }
+            startNewGame();
             return;
         }
 
@@ -186,6 +187,15 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
         }
         setMessage();
         checkWinner(isWinner());
+    }
+
+    private void startNewGame() {
+        for (Button b : buttons){
+            b.setClickable(true);
+            b.setText(EMPTY_TEXT);
+            isXPlayer = true;
+            setMessage();
+        }
     }
 
     private void checkWinner( int isWinner){
@@ -281,5 +291,73 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
            }
         }
         return false;
+    }
+
+    private SharedPreferences getPreferences(){
+        if (preferences == null){
+            preferences = getSharedPreferences("tictactoe", Context.MODE_PRIVATE);
+        }
+        return preferences;
+    }
+
+    private void saveState(){
+        preferences = getPreferences();
+        SharedPreferences.Editor editor = preferences.edit();
+
+        for (Button b : buttons){
+            editor.putString(Integer.toString(b.getId()), b.getText().toString());
+        }
+        editor.putBoolean("isXPlayer", isXPlayer);
+        editor.putInt("isWinner", isWinner());
+        editor.commit();
+    }
+
+    private final String UNDEFINED = "Undefined";
+
+    private void loadState(){
+        preferences = getPreferences();
+        for (Button b : buttons){
+            b.setText(preferences.getString(Integer.toString(b.getId()),UNDEFINED));
+        }
+        isXPlayer = preferences.getBoolean("isXPlayer", false);
+        int isWinner = preferences.getInt("isWinner", 0);
+        
+        if (isWinner == 0 || isUndefinedBtn()){
+            startNewGame();
+        } else {
+            setMessage();
+            checkWinner(isWinner);
+        }
+    }
+
+    private boolean isUndefinedBtn(){
+        for (Button b : buttons){
+            if (b.getText().toString().equals(UNDEFINED)){
+                return true;
+            }
+        }
+        return false;
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        Log.i(MainActivity.class.getSimpleName(), "On Stop");
+        saveState();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        Log.i(MainActivity.class.getSimpleName(), "On Destroy");
+        preferences = getPreferences();
+        preferences.edit().clear();
+    }
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        Log.i(MainActivity.class.getSimpleName(), "On Restart");
+        loadState();
     }
 }
