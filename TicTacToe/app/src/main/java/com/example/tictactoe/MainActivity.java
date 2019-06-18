@@ -35,6 +35,7 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
     final String X_PLAYER = "X";
     final String O_PLAYER = "O";
     final String EMPTY_TEXT = "";
+    final String UNDEFINED = "Undefined";
 
     List<Button> buttons = null;
 
@@ -193,9 +194,9 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
         for (Button b : buttons){
             b.setClickable(true);
             b.setText(EMPTY_TEXT);
-            isXPlayer = true;
-            setMessage();
         }
+        isXPlayer = true;
+        setMessage();
     }
 
     private void checkWinner( int isWinner){
@@ -312,8 +313,6 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
         editor.commit();
     }
 
-    private final String UNDEFINED = "Undefined";
-
     private void loadState(){
         preferences = getPreferences();
         for (Button b : buttons){
@@ -321,7 +320,7 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
         }
         isXPlayer = preferences.getBoolean("isXPlayer", false);
         int isWinner = preferences.getInt("isWinner", 0);
-        
+
         if (isWinner == 0 || isUndefinedBtn()){
             startNewGame();
         } else {
