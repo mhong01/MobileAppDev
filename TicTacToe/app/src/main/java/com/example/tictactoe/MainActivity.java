@@ -123,69 +123,15 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
             return;
         }
 
+        Button b = (Button) findViewById(v.getId());
         if (isXPlayer){
-            switch (v.getId()){
-                case R.id.btn1:
-                    btn1.setText(X_PLAYER);
-                    break;
-                case R.id.btn2:
-                    btn2.setText(X_PLAYER);
-                    break;
-                case R.id.btn3:
-                    btn3.setText(X_PLAYER);
-                    break;
-                case R.id.btn4:
-                    btn4.setText(X_PLAYER);
-                    break;
-                case R.id.btn5:
-                    btn5.setText(X_PLAYER);
-                    break;
-                case R.id.btn6:
-                    btn6.setText(X_PLAYER);
-                    break;
-                case R.id.btn7:
-                    btn7.setText(X_PLAYER);
-                    break;
-                case R.id.btn8:
-                    btn8.setText(X_PLAYER);
-                    break;
-                case R.id.btn9:
-                    btn9.setText(X_PLAYER);
-                    break;
-            }
+            b.setText(X_PLAYER);
             isXPlayer = false;
         } else {
-            switch (v.getId()){
-                case R.id.btn1:
-                    btn1.setText(O_PLAYER);
-                    break;
-                case R.id.btn2:
-                    btn2.setText(O_PLAYER);
-                    break;
-                case R.id.btn3:
-                    btn3.setText(O_PLAYER);
-                    break;
-                case R.id.btn4:
-                    btn4.setText(O_PLAYER);
-                    break;
-                case R.id.btn5:
-                    btn5.setText(O_PLAYER);
-                    break;
-                case R.id.btn6:
-                    btn6.setText(O_PLAYER);
-                    break;
-                case R.id.btn7:
-                    btn7.setText(O_PLAYER);
-                    break;
-                case R.id.btn8:
-                    btn8.setText(O_PLAYER);
-                    break;
-                case R.id.btn9:
-                    btn9.setText(O_PLAYER);
-                    break;
-            }
+            b.setText(O_PLAYER);
             isXPlayer = true;
         }
+        b.setClickable(false);
         setMessage();
         checkWinner(isWinner());
     }
