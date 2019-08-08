@@ -80,13 +80,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             if(counter == 0){
                 rowLayout = new LinearLayout(this);
                 rowLayout.setOrientation(LinearLayout.HORIZONTAL);
+                rowLayout.setWeightSum(Y);
             }
             if (counter < X){
                 counter++;
                 imageViews[i] = initImageView(imageViews[i]);
                 int id = i + 1 ;
                 imageViews[i].setId(id);
-                rowLayout.setWeightSum(Y);
                 rowLayout.addView(imageViews[i]);
             }
             if (counter == X){
@@ -192,23 +192,22 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private void newGame(ImageView[] imageViews){
-        moveCount = 0;
-        textView.setText(MOVES_SO_FAR + moveCount);
         if (imageViews == null){
             return;
         }
+        moveCount = 0;
+        textView.setText(MOVES_SO_FAR + moveCount);
+        txtWinMsg.setText("");
         List randoms = new LinkedList<>();
         randoms = getRandomNumber(randoms,LENGTH);
         for (int i = 0; i < imageViews.length; i++){
             if (imageViews[i] == null){
                 return;
             }
-
             imageViews[i].setImageResource(drawableIds.get((int) randoms.get(i)));
             imageViews[i].setTag(drawableIds.get((int) randoms.get(i)));
             imageViews[i].setEnabled(true);
         }
-        txtWinMsg.setText("");
     }
 
     private List getRandomNumber(List randoms, int bound){
@@ -232,7 +231,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         if (imgV == null){
             imgV = new ImageView(this);
         }
-        imgV.setBackgroundColor(Color.YELLOW);
+//        imgV.setBackgroundColor(Color.YELLOW);
         LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
                 LinearLayout.LayoutParams.WRAP_CONTENT,
                 LinearLayout.LayoutParams.WRAP_CONTENT
@@ -256,7 +255,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 txtWinMsg.setText("You won!");
             }
         }
-        
+
     }
 
     private void swapBlock (View v){
