@@ -1,13 +1,9 @@
 package com.example.asynctaskdemo_300299969;
 
 import android.content.Context;
-import android.net.Uri;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,34 +11,15 @@ import android.widget.TextView;
 
 import com.example.asynctaskdemo_300299969.Task.CounterTask;
 
-import java.util.concurrent.ExecutionException;
-
-
 public class Layout1 extends Fragment {
 
-    private int result = 0;
     private int initValue = 0;
-
-    private String msg = "";
-
     private TextView counterMsg = null;
     private CounterTask task = null;
-
-    private boolean isExecuting = false;
 
     public Layout1() {
 
     }
-
-    interface TaskCallbacks {
-        void onPreExecute();
-        void onProgressUpdate(int percent);
-        void onCancelled();
-        void onPostExecute();
-    }
-
-    public static TaskCallbacks mCallbacks;
-
 
     public static Layout1 newInstance(String param1, String param2) {
         Layout1 fragment = new Layout1();
@@ -92,7 +69,6 @@ public class Layout1 extends Fragment {
     @Override
     public void onStart() {
         super.onStart();
-        Log.i("Frag", "On Start");
         initializeTask();
         if (task != null && !task.isExecuting()){
             task.setTextView(counterMsg);
@@ -110,9 +86,6 @@ public class Layout1 extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-//        counterMsg.setText(task.getResultTxt());
-//        task.setTextView(counterMsg);
-//        Log.i("Frag", "On Resume");
     }
 
     @Override

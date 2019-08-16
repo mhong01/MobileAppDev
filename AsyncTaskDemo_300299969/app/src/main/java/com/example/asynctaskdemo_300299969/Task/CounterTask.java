@@ -19,14 +19,14 @@ import android.widget.TextView;
 
 public class CounterTask extends AsyncTask<Integer, Integer, Integer> {
 
-    private TextView view = null;
+    private TextView counterMsg = null;
 
     private String resultTxt = "";
 
     private boolean isExecuting = false;
 
     public void setTextView(TextView view ){
-        this.view = view;
+        this.counterMsg = view;
     }
 
     public String getResultTxt() {
@@ -66,9 +66,9 @@ public class CounterTask extends AsyncTask<Integer, Integer, Integer> {
     @Override
     protected void onProgressUpdate(Integer... values) {
         Log.i("Progress", "Msg: " + values[0]);
-        if (this.view != null){
+        if (this.counterMsg != null){
             resultTxt = String.valueOf(values[0]);
-            this.view.setText(resultTxt);
+            this.counterMsg.setText(resultTxt);
         }
     }
 

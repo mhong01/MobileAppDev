@@ -38,10 +38,6 @@ public class MainActivity extends AppCompatActivity
     @Override
     public void onAttachFragment(Fragment fragment) {
         super.onAttachFragment(fragment);
-        Log.i("Main", "Re-attach frag");
-        if (fragment.getRetainInstance()){
-
-        }
     }
 
     @Override
